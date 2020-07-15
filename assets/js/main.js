@@ -18,7 +18,7 @@ function dadosVeiculo(id) {
             $("#ano h6").text(dados[0].ano)
             $("#modelo").text(dados[0].veiculo)
             $("#descricao").text(dados[0].descricao)
-
+            $("#btnDeletar").show()
             $("#marca2").val(dados[0].marca)
             $("#ano2").val(dados[0].ano)
             $("#modelo2").val(dados[0].veiculo)
@@ -185,6 +185,7 @@ function salvar() {
 }
 
 function abrirModal() {
+    $("#btnDeletar").hide()
     $("#marca2").val('')
     $("#ano2").val('')
     $("#modelo2").val('')
