@@ -5,8 +5,6 @@ require_once 'classes/Veiculo.php';
 
 class Rest
 {
-
-
     public static function getVeiculos($data)
     {
         $maximo = 5;
@@ -26,13 +24,10 @@ class Rest
         }
 
         $retorno = Veiculo::busca($parametros,$inicio,$maximo);
-        $total = Veiculo::totalRegistro($parametros);
-        $marcas = Veiculo::getMarcas();
-        $modelos = Veiculo::getModelos();
+        $total   = Veiculo::totalRegistro($parametros);
         
         $numPage = ceil($total['total']/$maximo);
         $paginas = '';
-        $marcasModelos = '<option></option>' ;
 
         for($i=1;$i<=$numPage;$i++)
         {
@@ -44,22 +39,27 @@ class Rest
             $paginas.= $item;
         }
 
+        if($retorno){
+            return json_encode(array('status'=>'sucesso', 'dados' => $retorno, 'paginas'=>$paginas));
+        }
+        
+        return json_encode(array('status'=>'erro', 'dados' => 'Nenhum veículo encontrado'));
+    }
+    
+    public static function marcasModelos($data)
+    {
+        $marcas  = Veiculo::getMarcasModelos($data['filtro']);
+
+        $marcasModelos = '<option class="oculta"></option>' ;
+
+
         foreach($marcas as $linha)
         {
-            $marcasModelos.= '<option class="oculta tipo-marca" value="'.$linha['marca'].'">'.$linha['marca'].'</option>';
+            $marcasModelos.= '<option class="tipo-'.$data['filtro'].'" value="'.$linha[$data['filtro']].'">'.$linha[$data['filtro']].'</option>';
         }
 
-        foreach($modelos as $linha)
-        {
-            $marcasModelos.= '<option class="oculta tipo-veiculo" value="'.$linha['veiculo'].'">'.$linha['veiculo'].'</option>';
-        }
-        
-        if($retorno){
-            return json_encode(array('status'=>'sucesso','teste'=>$parametros, 'dados' => $retorno, 'paginas'=>$paginas, 'marcasModelos'=>$marcasModelos));
-        }
-        
-        return json_encode(array('status'=>'erro', 'dados' => 'Nenhum veículo encontrado','teste'=>$parametros));
-    }
+        return json_encode(array('marcasModelos'=>$marcasModelos));
+    }    
 
     public static function atualizaVeiculo($data)
     {
@@ -128,15 +128,12 @@ class Rest
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        switch ($_GET['metodo']) {
-            case 'getVeiculos':
-                echo Rest::getVeiculos($_GET);
-            break;
-    
-            default:
-                echo json_encode(array('status'=>'erro', 'dados' => 'Médoto não encontrado'));
-            break;
-            
+        if(isset($_GET['metodo']) && $_GET['metodo']=='marcasModelos')
+        {
+            echo Rest::marcasModelos($_GET);
+        }
+        else{
+            echo Rest::getVeiculos($_GET);
         }
     break;
         

@@ -8,8 +8,7 @@ function dadosVeiculo(id) {
         type: "get",
         url: link,
         data: {
-            id: id,
-            metodo: 'getVeiculos'
+            id: id
         },
         dataType: 'json',
         success: function (res) {
@@ -37,13 +36,13 @@ function buscaVeiculos(pagina = 1) {
     var link = 'http://localhost/tony-veiculos/api/'
     var modelo = $("#valorTipoBusca").val()
     
-    arrayData = {metodo: 'getVeiculos',veiculo: veiculo,pagina: pagina,marca: modelo}
-
+    arrayData = {veiculo: veiculo,pagina: pagina,marca: modelo}
+    
     if($("#tipoBusca").val() == 'veiculo')
     {
-        arrayData = {metodo: 'getVeiculos',veiculo: veiculo,pagina: pagina,veiculo: modelo}
+        arrayData = {veiculo: veiculo,pagina: pagina,veiculo: modelo}
     }
-
+    
     $.ajax({
         type: "get",
         url: link,
@@ -53,12 +52,8 @@ function buscaVeiculos(pagina = 1) {
             res.status == 'sucesso' ? montaListaVeiculo(res.dados) : nenhumVeiculoEncontrado();
             $(".pagination li").remove();
             $(".pagination").append(res.paginas);
-            $("#valorTipoBusca option").remove();
-            $("#valorTipoBusca").append(res.marcasModelos);
         }
     })
-
-    
 }
 
 function montaListaVeiculo(dados) {
@@ -122,7 +117,6 @@ function adicionarVeiculo() {
         },
         dataType: 'json',
         success: function (res) {
-            console.log(res)
             alert(res.dados)
             location.reload()
         }
@@ -180,7 +174,6 @@ function deletarVeiculo() {
             dataType: 'json',
             success: function (res) {
                 dados = JSON.parse(res)
-                console.log(dados.dados)
                 alert(dados.dados)
                 location.reload()
             }
@@ -206,9 +199,18 @@ function abrirModal() {
 
 function buscaVeiculosPor()
 {
-    var tipoBusca = $("#tipoBusca").val();
-    $("#valorTipoBusca").val("")
-    $(".oculta").css('display','none');
-    $(".tipo-"+tipoBusca).css('display','block');
+    var filtro = $("#tipoBusca").val()
+
+    $.ajax({
+        type: "get",
+        url: 'http://localhost/tony-veiculos/api/',
+        data: {metodo: 'marcasModelos', filtro: filtro},
+        dataType: 'json',
+        success: function (res) {
+            console.log(res.marcasModelos)
+            $("#valorTipoBusca option").remove();
+            $("#valorTipoBusca").append(res.marcasModelos);
+        }
+    })
 
 }
