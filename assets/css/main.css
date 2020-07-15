@@ -1,3 +1,13 @@
+.navbar-brand{
+    font-size: 40px;
+    color: #0d52a9;
+    border-right: 2px solid #ccc;
+    padding-right: 14px;
+}
+.navbar{
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0px !important
+}
 .boxBusca {
     padding: 40px 30px;
 }
@@ -15,7 +25,7 @@
 .listaVeiculos {
     width: 60%;
     float: left;
-    padding: 20px;
+    padding: 20px 10px;
     background: #fff;
     border-radius: 6px;
 }
@@ -23,7 +33,7 @@
 .detalhesVeiculo {
     width: 37%;
     float: right;
-    padding: 20px;
+    padding: 20px 10px;
     background: #fff;
     border-radius: 6px;
 }
@@ -91,4 +101,8 @@
 
 #btnEditar{
     display: none;
+}
+
+h5{
+    font-weight: 700;
 }

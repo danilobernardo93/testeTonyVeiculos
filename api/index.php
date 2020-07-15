@@ -7,11 +7,10 @@ class Rest
 {
     public static function getVeiculos($data)
     {
-        $maximo = 3;
+        $maximo = 5;
         $pagina = isset($_GET['pagina']) ? ($_GET['pagina']) : '1'; 
         $inicio = $pagina - 1;
         $inicio = $maximo * $inicio;
-
 
         $parametros = array();
         $paramAltorizados = ['id','ano','marca','veiculo','descricao'];
