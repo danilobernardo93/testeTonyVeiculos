@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Veículos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="assets/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="javascript:void(0)">Teste</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Veículos </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="conteudo ">
+            <div class="row">
+                <div class="col-12 boxBusca">
+                    <input type="text" name="busca" placeholder="Buscar Veículo" id="buscaVeiculo"
+                        class="form-control" />
+                    <i class="fa fa-search icone-busca" onclick="buscaVeiculos()"></i>
+                    <i class="fa fa-plus icone-add" onclick="abrirModal()"></i>
+                </div>
+            </div>
+            <div class="veiculos clearfix">
+                <div class="listaVeiculos">
+                    <h5>Lista de veículos</h5>
+                    <table class="table table-striped mt-3" id="tabelaVeiculos">
+                        <tbody>
+
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <nav aria-label="Navegação de página exemplo">
+                                        <ul class="pagination">
+                                            <!-- <li class="page-item"><a class="page-link" href="#">Anterior</a></li> -->
+                                            <!-- <li class="page-item" onclick="buscaVeiculos(4)"><a class="page-link" href="#">Próximo</a></li> -->
+                                        </ul>
+                                    </nav>
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="detalhesVeiculo">
+                    <h5>Detalhes do veículo</h5>
+                    <hr>
+                    <div id="dadosVeiculo">
+                        <div id="modelo"></div>
+
+                        <div class="w-50 float-left" id="montadora">
+                            <label>MARCA</label>
+                            <h6></h6>
+                        </div>
+                        <div class="w-50 float-left" id="ano">
+                            <label>ANO</label>
+                            <h6></h6>
+                        </div>
+
+                        <div id="descricao">
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <button class="btn btn-azul " id="btnEditar" data-toggle="modal"
+                        data-target="#modalEditarVeiculo">EDITAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal" tabindex="-1" id="modalEditarVeiculo" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalhes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Veículo</label>
+                            <input type="text" id="modelo2" class="form-control" placeholder="Veículo" />
+                            <input type="hidden" id="veiculoID" />
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <label>Marca</label>
+                            <input type="text" id="marca2" class="form-control" placeholder="Marca" />
+                        </div>
+                        <div class="col-6">
+                            <label>Ano</label>
+                            <input type="text" id="ano2" class="form-control" placeholder="Ano" />
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>Descrição</label>
+                            <textarea class="form-control" id="descricao2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input type="checkbox" id="vendido" /> <label>Vendido</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger float-left" onclick="deletarVeiculo()">Deletar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvar()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="assets/dist/js/bootstrap.bundle.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
