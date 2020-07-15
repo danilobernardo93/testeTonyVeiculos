@@ -5,6 +5,8 @@ require_once 'classes/Veiculo.php';
 
 class Rest
 {
+
+
     public static function getVeiculos($data)
     {
         $maximo = 5;
@@ -25,9 +27,12 @@ class Rest
 
         $retorno = Veiculo::busca($parametros,$inicio,$maximo);
         $total = Veiculo::totalRegistro($parametros);
+        $marcas = Veiculo::getMarcas();
+        $modelos = Veiculo::getModelos();
         
         $numPage = ceil($total['total']/$maximo);
         $paginas = '';
+        $marcasModelos = '<option></option>' ;
 
         for($i=1;$i<=$numPage;$i++)
         {
@@ -38,12 +43,22 @@ class Rest
             }
             $paginas.= $item;
         }
-        
-        if($retorno){
-            return json_encode(array('status'=>'sucesso', 'dados' => $retorno, 'paginas'=>$paginas));
+
+        foreach($marcas as $linha)
+        {
+            $marcasModelos.= '<option class="oculta tipo-marca" value="'.$linha['marca'].'">'.$linha['marca'].'</option>';
+        }
+
+        foreach($modelos as $linha)
+        {
+            $marcasModelos.= '<option class="oculta tipo-veiculo" value="'.$linha['veiculo'].'">'.$linha['veiculo'].'</option>';
         }
         
-        return json_encode(array('status'=>'erro', 'dados' => 'Nenhum veículo encontrado'));
+        if($retorno){
+            return json_encode(array('status'=>'sucesso','teste'=>$parametros, 'dados' => $retorno, 'paginas'=>$paginas, 'marcasModelos'=>$marcasModelos));
+        }
+        
+        return json_encode(array('status'=>'erro', 'dados' => 'Nenhum veículo encontrado','teste'=>$parametros));
     }
 
     public static function atualizaVeiculo($data)
@@ -59,6 +74,8 @@ class Rest
                 $parametros[$key] = ($value);
             }
         }
+        date_default_timezone_set('America/Sao_Paulo');
+        $parametros['updated'] = date("Y-m-d H-i-s");
 
         $retorno = Veiculo::atualiza($parametros, $id);
 

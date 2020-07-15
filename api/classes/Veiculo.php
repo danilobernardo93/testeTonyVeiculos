@@ -9,7 +9,7 @@ class Veiculo
         $param = count($parametros)  > 0 ? ' WHERE id > 0 ' : '';
         foreach($parametros as $key => $value)
         {
-            $param.= $key == 'veiculo' ? " and $key  LIKE '%$value%' " : " and $key  = '$value' ";
+            $param.= " and $key  LIKE '%$value%' ";
         }
         
         $sql = "SELECT * FROM veiculos $param ORDER BY veiculo ASC LIMIT $inicio,$maximo";
@@ -47,6 +47,44 @@ class Veiculo
         while($row =  $sql->fetch(PDO::FETCH_ASSOC))
         {
             $resultados = $row;
+        }
+
+        return $resultados;
+    }
+
+    public function getModelos()
+    {
+        $con = new PDO('mysql: host=localhost; dbname=tony;','root','');
+
+        $sql = "SELECT veiculo FROM veiculos GROUP BY veiculo";
+        $sql = $con->prepare($sql);
+        
+        $sql->execute();
+
+        $resultados = array();
+
+        while($row =  $sql->fetch(PDO::FETCH_ASSOC))
+        {
+            $resultados[] = $row;
+        }
+
+        return $resultados;
+    }
+
+    public function getMarcas()
+    {
+        $con = new PDO('mysql: host=localhost; dbname=tony;','root','');
+
+        $sql = "SELECT marca FROM veiculos GROUP BY marca";
+        $sql = $con->prepare($sql);
+        
+        $sql->execute();
+
+        $resultados = array();
+
+        while($row =  $sql->fetch(PDO::FETCH_ASSOC))
+        {
+            $resultados[] = $row;
         }
 
         return $resultados;

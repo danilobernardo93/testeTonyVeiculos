@@ -33,23 +33,32 @@ function dadosVeiculo(id) {
 }
 
 function buscaVeiculos(pagina = 1) {
-    var modelo = $("#buscaVeiculo").val();
+    var veiculo = $("#buscaVeiculo").val();
     var link = 'http://localhost/tony-veiculos/api/'
+    var modelo = $("#valorTipoBusca").val()
+    
+    arrayData = {metodo: 'getVeiculos',veiculo: veiculo,pagina: pagina,marca: modelo}
+
+    if($("#tipoBusca").val() == 'veiculo')
+    {
+        arrayData = {metodo: 'getVeiculos',veiculo: veiculo,pagina: pagina,veiculo: modelo}
+    }
+
     $.ajax({
         type: "get",
         url: link,
-        data: {
-            metodo: 'getVeiculos',
-            veiculo: modelo,
-            pagina: pagina
-        },
+        data: arrayData,
         dataType: 'json',
         success: function (res) {
             res.status == 'sucesso' ? montaListaVeiculo(res.dados) : nenhumVeiculoEncontrado();
             $(".pagination li").remove();
             $(".pagination").append(res.paginas);
+            $("#valorTipoBusca option").remove();
+            $("#valorTipoBusca").append(res.marcasModelos);
         }
     })
+
+    
 }
 
 function montaListaVeiculo(dados) {
@@ -193,4 +202,13 @@ function abrirModal() {
     $("#veiculoID").val('')
     $("#vendido").prop("checked", false);
     $("#modalEditarVeiculo").modal();
+}
+
+function buscaVeiculosPor()
+{
+    var tipoBusca = $("#tipoBusca").val();
+    $("#valorTipoBusca").val("")
+    $(".oculta").css('display','none');
+    $(".tipo-"+tipoBusca).css('display','block');
+
 }
