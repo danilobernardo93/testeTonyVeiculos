@@ -7,27 +7,25 @@ function dadosVeiculo(id) {
     $.ajax({
         type: "get",
         url: link,
-        data: {
-            id: id
-        },
+        data: {id: id},
         dataType: 'json',
         success: function (res) {
             dados = res.dados
-            $("#montadora h6").text(dados[0].marca)
-            $("#ano h6").text(dados[0].ano)
-            $("#modelo").text(dados[0].veiculo)
-            $("#descricao").text(dados[0].descricao)
+            $("#montadora h6").text(dados.marca)
+            $("#ano h6").text(dados.ano)
+            $("#modelo").text(dados.veiculo)
+            $("#descricao").text(dados.descricao)
             $("#btnDeletar").show()
-            $("#marca2").val(dados[0].marca)
-            $("#ano2").val(dados[0].ano)
-            $("#modelo2").val(dados[0].veiculo)
-            $("#descricao2").text(dados[0].descricao)
-            $("#veiculoID").val(dados[0].id)
+            $("#marca2").val(dados.marca)
+            $("#ano2").val(dados.ano)
+            $("#modelo2").val(dados.veiculo)
+            $("#descricao2").text(dados.descricao)
+            $("#veiculoID").val(dados.id)
 
-            if (dados[0].vendido == 1) {
+            if (dados.vendido == 1) {
                 document.getElementById("vendido").checked = true
             }
-        }
+        },error: function(a,b,c){}
     })
 }
 
@@ -207,7 +205,6 @@ function buscaVeiculosPor()
         data: {metodo: 'marcasModelos', filtro: filtro},
         dataType: 'json',
         success: function (res) {
-            console.log(res.marcasModelos)
             $("#valorTipoBusca option").remove();
             $("#valorTipoBusca").append(res.marcasModelos);
         }

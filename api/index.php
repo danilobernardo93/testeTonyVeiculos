@@ -45,6 +45,21 @@ class Rest
         
         return json_encode(array('status'=>'erro', 'dados' => 'Nenhum veículo encontrado'));
     }
+
+    public static function getVeiculo($id)
+    {
+
+        
+
+        $retorno = is_numeric($_GET['id']) ? Veiculo::getVeiculo($id) : false;
+        
+
+        if($retorno){
+            return json_encode(array('status'=>'sucesso', 'dados' => $retorno));
+        }
+        
+        return json_encode(array('status'=>'erro', 'dados' => 'Nenhum veículo encontrado'));
+    }
     
     public static function marcasModelos($data)
     {
@@ -131,6 +146,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if(isset($_GET['metodo']) && $_GET['metodo']=='marcasModelos')
         {
             echo Rest::marcasModelos($_GET);
+        }
+        else if(isset($_GET['id']))
+        {
+            echo Rest::getVeiculo($_GET['id']);
         }
         else{
             echo Rest::getVeiculos($_GET);
