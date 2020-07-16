@@ -1,0 +1,43 @@
+LINK => http://localhost/tony-veiculos/api/
+
+
+GET
+    Consulta de todos veículos (sem filtro) 
+        GET
+
+    Consulta veículo 
+        GET['id'] => int
+    
+    Consulta de todos veículos (com filtro) 
+        GET['veiculo'] => string
+        GET['pagina'] => int
+        GET['marca'] => string
+        GET['modelo'] => string
+
+    Consulta de marcas e modelos no DB
+        GET['marcasModelos'] = null
+        GET['filtro'] = veiculo | marca
+
+
+POST
+    Novo Veículo dados 
+        ano => int
+        marca => string
+        veiculo => string
+        vendido => boolean
+        descricao => string
+
+
+PUT
+    Atualizar Veículo (id obrigatorio)
+        id => int
+        ano => int
+        marca => string
+        veiculo => string
+        vendido => boolean
+        descricao => string
+
+
+DELETE
+    Deletar Veículo (id obrigatorio)
+        id => int

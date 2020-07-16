@@ -143,7 +143,7 @@ class Rest
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        if(isset($_GET['metodo']) && $_GET['metodo']=='marcasModelos')
+        if(isset($_GET['marcasModelos']))
         {
             echo Rest::marcasModelos($_GET);
         }

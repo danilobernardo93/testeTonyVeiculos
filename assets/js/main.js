@@ -202,7 +202,7 @@ function buscaVeiculosPor()
     $.ajax({
         type: "get",
         url: 'http://localhost/tony-veiculos/api/',
-        data: {metodo: 'marcasModelos', filtro: filtro},
+        data: {marcasModelos: '', filtro: filtro},
         dataType: 'json',
         success: function (res) {
             $("#valorTipoBusca option").remove();
