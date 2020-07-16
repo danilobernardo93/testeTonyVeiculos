@@ -1,6 +1,7 @@
 LINK => http://localhost/tony-veiculos/api/
 
 
+
 GET
     Consulta de todos veículos (sem filtro) 
         GET

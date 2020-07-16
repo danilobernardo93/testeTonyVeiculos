@@ -3,7 +3,7 @@ window.onload = buscaVeiculos(1);
 function dadosVeiculo(id) {
     document.getElementById("vendido").checked = false
     $("#btnEditar").show()
-    var link = 'http://localhost/tony-veiculos/api'
+    var link = location.href+'api/'
     $.ajax({
         type: "get",
         url: link,
@@ -31,7 +31,7 @@ function dadosVeiculo(id) {
 
 function buscaVeiculos(pagina = 1) {
     var veiculo = $("#buscaVeiculo").val();
-    var link = 'http://localhost/tony-veiculos/api/'
+    var link = location.href+'api/'
     var modelo = $("#valorTipoBusca").val()
     
     arrayData = {veiculo: veiculo,pagina: pagina,marca: modelo}
@@ -99,7 +99,8 @@ function adicionarVeiculo() {
     var vendido = $("#vendido").prop("checked") ? 1 : 0;
 
 
-    var link = 'http://localhost/tony-veiculos/api/'
+    var link = location.href+'api/'
+    console.log(link)
     $.ajax({
         type: 'post',
         url: link,
@@ -128,7 +129,7 @@ function editaVeiculo() {
     var vendido = $("#vendido").prop("checked") ? 1 : 0;
 
 
-    var link = 'http://localhost/tony-veiculos/api/curl.php'
+    var link = location.href+'api/curl.php'
     $.ajax({
         type: 'post',
         url: link,
@@ -156,7 +157,7 @@ function editaVeiculo() {
 function deletarVeiculo() {
     document.getElementById("vendido").checked = false
     var id = $("#veiculoID").val()
-    var link = 'http://localhost/tony-veiculos/api/curl.php'
+    var link = location.href+'api/curl.php'
 
     if (confirm("Deseja realmente deletar o veículo ?")) {
         $.ajax({
@@ -198,7 +199,7 @@ function buscaVeiculosPor()
 
     $.ajax({
         type: "get",
-        url: 'http://localhost/tony-veiculos/api/',
+        url: location.href+'api/',
         data: {marcasModelos: '', filtro: filtro},
         dataType: 'json',
         success: function (res) {
