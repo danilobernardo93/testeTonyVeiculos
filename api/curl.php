@@ -12,7 +12,7 @@ foreach ($_POST as $key => $value) {
 }
 
 $paramentros = substr($param,0,-1);
-$url       = 'http://localhost/tony-veiculos/api/'.$paramentros;
+$url        = $_SERVER['HTTP_HOST'].str_replace("curl.php","",$_SERVER['PHP_SELF']).$paramentros;
 
 $ch = curl_init();
 

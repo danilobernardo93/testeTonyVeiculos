@@ -130,6 +130,7 @@ function editaVeiculo() {
 
 
     var link = location.href+'api/curl.php'
+    console.log(link)
     $.ajax({
         type: 'post',
         url: link,
@@ -145,6 +146,7 @@ function editaVeiculo() {
         },
         dataType: 'json',
         success: function (res) {
+            console.log(res)
             dados = JSON.parse(res)
 
             alert(dados.dados)
