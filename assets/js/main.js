@@ -110,7 +110,7 @@ function adicionarVeiculo() {
             veiculo: veiculo,
             vendido: vendido,
             descricao: descricao,
-            metodo: 'adicionarVeiculo'
+            // metodo: 'adicionarVeiculo'
         },
         dataType: 'json',
         success: function (res) {

@@ -137,16 +137,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     break;
         
     case 'POST':
-        switch ($_POST['metodo']) 
-        { 
-            case 'adicionarVeiculo':
-                echo Rest::adicionarVeiculo($_POST);
-            break;
-
-            default:
-                echo json_encode(array('status'=>'erro', 'dados' => $_POST));
-            break;
-        }
+        echo Rest::adicionarVeiculo($_REQUEST);
     break;
 
     case 'PUT':

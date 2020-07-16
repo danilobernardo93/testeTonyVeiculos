@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 15-Jul-2020 às 18:43
+-- Tempo de geração: 16-Jul-2020 às 05:44
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.2
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `veiculos` (
   `id` int(11) NOT NULL,
-  `veiculo` varchar(100) NOT NULL,
-  `marca` varchar(100) NOT NULL,
-  `ano` int(11) NOT NULL,
-  `descricao` text NOT NULL,
+  `veiculo` varchar(100) DEFAULT NULL,
+  `marca` varchar(100) DEFAULT NULL,
+  `ano` int(11) DEFAULT NULL,
+  `descricao` text DEFAULT NULL,
   `vendido` tinyint(1) NOT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
