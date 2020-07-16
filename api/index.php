@@ -7,7 +7,7 @@ class Rest
 {
     public static function getVeiculos($data)
     {
-        $maximo = 5;
+        $maximo = 10;
         $pagina = isset($_GET['pagina']) ? ($_GET['pagina']) : '1'; 
         $inicio = $pagina - 1;
         $inicio = $maximo * $inicio;
@@ -27,20 +27,9 @@ class Rest
         $total   = Veiculo::totalRegistro($parametros);
         
         $numPage = ceil($total['total']/$maximo);
-        $paginas = '';
-
-        for($i=1;$i<=$numPage;$i++)
-        {
-            $item = '<li class="page-item" onclick="buscaVeiculos('.$i.')"><a class="page-link" href="#">'.$i.'</a></li>';
-            if($pagina == $i)
-            {
-                $item = '<li class="page-item active" ><a class="page-link" href="#">'.$i.'</a></li>';
-            }
-            $paginas.= $item;
-        }
 
         if($retorno){
-            return json_encode(array('status'=>'sucesso', 'dados' => $retorno, 'paginas'=>$paginas));
+            return json_encode(array('status'=>'sucesso', 'dados' => $retorno, 'numPaginas'=>$numPage,'porPagina'=>$maximo));
         }
         
         return json_encode(array('status'=>'erro', 'dados' => 'Nenhum veículo encontrado'));
@@ -65,15 +54,15 @@ class Rest
     {
         $marcas  = Veiculo::getMarcasModelos($data['filtro']);
 
-        $marcasModelos = '<option class="oculta"></option>' ;
+        // $marcasModelos = '<option class="oculta"></option>' ;
 
 
-        foreach($marcas as $linha)
-        {
-            $marcasModelos.= '<option class="tipo-'.$data['filtro'].'" value="'.$linha[$data['filtro']].'">'.$linha[$data['filtro']].'</option>';
-        }
+        // foreach($marcas as $linha)
+        // {
+        //     $marcasModelos.= '<option class="tipo-'.$data['filtro'].'" value="'.$linha[$data['filtro']].'">'.$linha[$data['filtro']].'</option>';
+        // }
 
-        return json_encode(array('marcasModelos'=>$marcasModelos));
+        return json_encode(array('marcasModelos'=>$marcas,'filtro'=>$data['filtro']));
     }    
 
     public static function atualizaVeiculo($data)

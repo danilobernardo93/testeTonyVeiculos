@@ -149,7 +149,7 @@ class Veiculo
 
         while($row =  $sql->fetch(PDO::FETCH_ASSOC))
         {
-            $resultados[] = $row;
+            $resultados[] = $row[$campo];
         }
 
         return $resultados;

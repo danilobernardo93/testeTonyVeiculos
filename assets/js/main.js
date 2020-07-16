@@ -48,8 +48,7 @@ function buscaVeiculos(pagina = 1) {
         dataType: 'json',
         success: function (res) {
             res.status == 'sucesso' ? montaListaVeiculo(res.dados) : nenhumVeiculoEncontrado();
-            $(".pagination li").remove();
-            $(".pagination").append(res.paginas);
+            paginacao(res.numPaginas,pagina)
         }
     })
 }
@@ -206,8 +205,27 @@ function buscaVeiculosPor()
         dataType: 'json',
         success: function (res) {
             $("#valorTipoBusca option").remove();
-            $("#valorTipoBusca").append(res.marcasModelos);
+            res.marcasModelos.forEach(montaListaFiltro);
         }
     })
+}
 
+function montaListaFiltro(index) {
+    $("#valorTipoBusca").append('<option value="'+index+'">'+index+'</option>');
+}
+ 
+function paginacao(numPages,paginaAtual)
+{
+    var listaPagina = '';
+    for(i=1;i<=numPages;i++)
+    {
+        item = '<li class="page-item" onclick="buscaVeiculos('+i+')"><a class="page-link" href="#">'+i+'</a></li>'
+        if(paginaAtual == i)
+        {
+            item = '<li class="page-item active" ><a class="page-link" href="#">'+i+'</a></li>';
+        }
+        listaPagina+=item
+    }
+    $(".pagination li").remove();
+    $(".pagination").append(listaPagina)
 }
