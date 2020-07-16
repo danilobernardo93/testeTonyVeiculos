@@ -37,11 +37,7 @@ class Rest
 
     public static function getVeiculo($id)
     {
-
-        
-
         $retorno = is_numeric($_GET['id']) ? Veiculo::getVeiculo($id) : false;
-        
 
         if($retorno){
             return json_encode(array('status'=>'sucesso', 'dados' => $retorno));

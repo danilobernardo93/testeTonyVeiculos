@@ -110,7 +110,6 @@ function adicionarVeiculo() {
             veiculo: veiculo,
             vendido: vendido,
             descricao: descricao,
-            // metodo: 'adicionarVeiculo'
         },
         dataType: 'json',
         success: function (res) {
@@ -118,7 +117,6 @@ function adicionarVeiculo() {
             location.reload()
         }
     })
-
 }
 
 function editaVeiculo() {
