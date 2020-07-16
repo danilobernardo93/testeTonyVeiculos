@@ -9,7 +9,6 @@ class Veiculo
         $param = count($parametros)  > 0 ? ' WHERE id > 0 ' : '';
         foreach($parametros as $key => $value)
         {
-            // $param.= $key == 'veiculo' ? " and $key  LIKE '%$value%' " : " and $key  = '$value' ";
             $param.= " and $key  LIKE '%$value%' ";
         }
         

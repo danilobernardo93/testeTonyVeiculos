@@ -53,15 +53,6 @@ class Rest
     public static function marcasModelos($data)
     {
         $marcas  = Veiculo::getMarcasModelos($data['filtro']);
-
-        // $marcasModelos = '<option class="oculta"></option>' ;
-
-
-        // foreach($marcas as $linha)
-        // {
-        //     $marcasModelos.= '<option class="tipo-'.$data['filtro'].'" value="'.$linha[$data['filtro']].'">'.$linha[$data['filtro']].'</option>';
-        // }
-
         return json_encode(array('marcasModelos'=>$marcas,'filtro'=>$data['filtro']));
     }    
 
